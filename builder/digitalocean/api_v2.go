@@ -76,7 +76,7 @@ func (d DigitalOceanClientV2) CreateDroplet(name string, size string, image stri
 		Name              string   `json:"name"`
 		Region            string   `json:"region"`
 		Size              string   `json:"size"`
-		Image             string   `json:"image"`
+		Image             uint     `json:"image"`
 		SSHKeys           []string `json:"ssh_keys,omitempty"`
 		Backups           bool     `json:"backups,omitempty"`
 		IPv6              bool     `json:"ipv6,omitempty"`
@@ -139,7 +139,7 @@ func (d DigitalOceanClientV2) CreateDroplet(name string, size string, image stri
 	}
 
 	req.Size = found_size.Slug
-	req.Image = found_image.Slug
+	req.Image = found_image.Id
 	req.Region = found_region.Slug
 	req.SSHKeys = []string{fmt.Sprintf("%v", keyId)}
 	req.PrivateNetworking = privateNetworking
